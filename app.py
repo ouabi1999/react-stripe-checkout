@@ -1,14 +1,22 @@
-from flask import Flask, json, request, jsonify
+from flask import Flask, json, request, jsonify, send_from_directory
 import os
 import stripe
 from flask_cors import CORS, cross_origin
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="./front-end/build", static_url_path='/', template_folder='../templates', instance_relative_config=True)
 CORS(app, supports_credentials=True)
 endpoint_secret = os.environ.get('END_POINT_SECRET')
 
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
+@app.route("/")
 
+def serve():
+    return send_from_directory(app.static_folder, "index.html")
+    
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
 def calculate_order_amount(price):
     # Replace this constant with a calculation of the order's amount
     # Calculate the order total on the server to prevent
