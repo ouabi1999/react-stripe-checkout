@@ -2,7 +2,7 @@
   "name": "checkout",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://urchin-app-jk64d.ondigitalocean.app",
+  "proxy": "https://react-stripe-checkout.onrender.com",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
